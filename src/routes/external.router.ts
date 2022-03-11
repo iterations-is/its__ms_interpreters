@@ -1,8 +1,16 @@
 import { Router } from 'express';
 
-import { epExampleExternal } from './external';
+import {
+	epCreateInterpreter,
+	epDeleteInterpreter,
+	epGetAllInterpreters,
+	epGetInterpreter,
+} from './external';
 import { mwAuthorization } from '../../src-ms';
 
 export const externalRouter = Router();
 
-externalRouter.get('/entityExternal', mwAuthorization, epExampleExternal);
+externalRouter.post('/interpreters', mwAuthorization, epCreateInterpreter);
+externalRouter.get('/interpreters', mwAuthorization, epGetAllInterpreters);
+externalRouter.get('/interpreters/:interpreterId', mwAuthorization, epGetInterpreter);
+externalRouter.delete('/interpreters/:interpreterId', mwAuthorization, epDeleteInterpreter);

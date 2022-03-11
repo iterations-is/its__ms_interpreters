@@ -14,9 +14,9 @@ const app = express();
 
 app.use(json());
 
-app.use('/name-service', aboutRouter);
-app.use('/name-service', externalRouter);
-app.use('/name-service', internalRouter);
+app.use('/interpreters-service', aboutRouter);
+app.use('/interpreters-service', externalRouter);
+app.use('/interpreters-service', internalRouter);
 
 app.listen(MS_EXPRESS_PORT, () => {
 	console.log('http://localhost:' + MS_EXPRESS_PORT);

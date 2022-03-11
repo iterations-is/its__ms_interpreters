@@ -1,1 +1,1 @@
-export * from './ExampleReqDTO';
+export * from './CreateInterpreterReqDTO';

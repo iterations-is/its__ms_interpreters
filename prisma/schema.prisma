@@ -12,4 +12,6 @@ model Interpret {
   name      String
   version   String
   url       String
+
+  @@unique([name, version])
 }
