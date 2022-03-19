@@ -1,7 +1,7 @@
 {
-  "name": "its__ms_interprets",
+  "name": "its__ms_interpreters",
   "version": "0.0.1",
-  "description": "MS Interprets - management of interprets",
+  "description": "MS Interprets - management of interpreters",
   "license": "MIT",
   "author": {
     "name": "Sergey Dunaevskiy",
