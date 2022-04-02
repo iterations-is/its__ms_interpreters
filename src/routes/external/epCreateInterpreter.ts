@@ -1,13 +1,8 @@
 import { Request, Response } from 'express';
-import { PrismaClient } from '@prisma/client';
 
 import { CreateInterpreterReqDTO, CreateInterpreterReqDTOSchema } from '../../dto';
+import { prisma } from '../../utils';
 
-const prisma = new PrismaClient();
-
-/**
- * Requires mwAuthorization
- */
 export const epCreateInterpreter = async (req: Request, res: Response) => {
 	// Validation
 	const createInterpretReq: CreateInterpreterReqDTO = req.body;

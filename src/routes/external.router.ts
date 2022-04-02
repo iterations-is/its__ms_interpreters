@@ -6,11 +6,15 @@ import {
 	epGetAllInterpreters,
 	epGetInterpreter,
 } from './external';
-import { mwAuthorization } from '../../src-ms';
+import { mwAuthorization } from '@its/ms';
 
 export const externalRouter = Router();
 
 externalRouter.post('/interpreters', mwAuthorization, epCreateInterpreter);
 externalRouter.get('/interpreters', mwAuthorization, epGetAllInterpreters);
-externalRouter.get('/interpreters/:interpreterId', mwAuthorization, epGetInterpreter);
+externalRouter.get(
+	'/interpreters/:interpreterName/:interpreterVersion',
+	mwAuthorization,
+	epGetInterpreter
+);
 externalRouter.delete('/interpreters/:interpreterId', mwAuthorization, epDeleteInterpreter);

@@ -1,15 +1,15 @@
 import { Request, Response } from 'express';
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+import { prisma } from '../../utils';
 
 export const epGetInterpreter = async (req: Request, res: Response) => {
-	const interpreterId = req.params.interpreterId;
+	const interpreterName = req.params.interpreterName;
+	const interpreterVersion = req.params.interpreterVersion;
 
 	try {
-		const interpreter = await prisma.interpret.findUnique({
+		const interpreter = await prisma.interpret.findFirst({
 			where: {
-				id: interpreterId,
+				name: interpreterName,
+				version: interpreterVersion,
 			},
 		});
 
