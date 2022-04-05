@@ -2,12 +2,13 @@ import { Request, Response } from 'express';
 
 import { CreateInterpreterReqDTO, CreateInterpreterReqDTOSchema } from '../../dto';
 import { prisma } from '../../utils';
+import { MessageDTO } from '@its/ms';
 
 export const epCreateInterpreter = async (req: Request, res: Response) => {
 	// Validation
 	const createInterpretReq: CreateInterpreterReqDTO = req.body;
 	const { error } = CreateInterpreterReqDTOSchema.validate(createInterpretReq);
-	if (error) return res.status(400).json(error);
+	if (error) return res.status(400).json({ code: 'VALIDATION', payload: error } as MessageDTO);
 
 	// Create
 	try {
@@ -27,9 +28,10 @@ export const epCreateInterpreter = async (req: Request, res: Response) => {
 				},
 			});
 
-			return res
-				.status(200)
-				.json({ message: `interpreter ${inter.name}@${inter.version} was created` });
+			return res.status(200).json({
+				message: `interpreter ${inter.name}@${inter.version} was created`,
+				code: 'INTERPRETER_CREATED',
+			});
 		} else {
 			// Update existing
 			await prisma.interpret.update({
@@ -43,9 +45,10 @@ export const epCreateInterpreter = async (req: Request, res: Response) => {
 				},
 			});
 
-			return res
-				.status(200)
-				.json({ message: `interpreter ${interpreter.name}@${interpreter.version} was updated` });
+			return res.status(200).json({
+				message: `interpreter ${interpreter.name}@${interpreter.version} was updated`,
+				code: 'INTERPRETER_UPDATED',
+			});
 		}
 	} catch (error) {
 		return res.status(500).json({ message: 'internal server error', payload: { error } });
